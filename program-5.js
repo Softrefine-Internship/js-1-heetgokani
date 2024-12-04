@@ -11,3 +11,31 @@ Given an integer array flowerbed containing 0's and 1's, where 0 means empty and
 // Example 2:
 // Input: flowerbed = [1,0,0,0,1], n = 2
 // Output: false
+"use strict";
+function checkFlowerPlanting(flowerbed, n) {
+  let i = 0;
+  let count = 0;
+  while (i < flowerbed.length) {
+    if (flowerbed[i] === 0) {
+      let canPlant = true;
+      if (i > 0 && flowerbed[i - 1] === 1) {
+        canPlant = false;
+      }
+      if (i < flowerbed.length - 1 && flowerbed[i + 1] === 1) {
+        canPlant = false;
+      }
+      if (canPlant) {
+        flowerbed[i] = 1;
+        count++;
+        i += 2;
+      } else {
+        i++;
+      }
+    } else {
+      i++;
+    }
+  }
+  return count >= n;
+}
+console.log(checkFlowerPlanting([1, 0, 0, 0, 1], 1));
+console.log(checkFlowerPlanting([1, 0, 0, 0, 1], 2));
